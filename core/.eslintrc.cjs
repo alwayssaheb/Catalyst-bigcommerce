@@ -1,11 +1,11 @@
-// @ts-check
-
-// eslint-disable-next-line import/no-extraneous-dependencies
-require('@bigcommerce/eslint-config/patch');
-
 /** @type {import('eslint').Linter.Config} */
 const config = {
   root: true,
+  parserOptions: {
+    project: "tsconfig.json",  // Ensures ESLint finds the TypeScript config
+    tsconfigRootDir: __dirname, // Fixes the issue of ESLint not finding tsconfig.json
+    sourceType: "module",
+  },
   extends: [
     '@bigcommerce/catalyst/base',
     '@bigcommerce/catalyst/react',
@@ -19,7 +19,7 @@ const config = {
     'no-underscore-dangle': ['error', { allow: ['__typename'] }],
     '@typescript-eslint/prefer-nullish-coalescing': 'off',
     '@typescript-eslint/no-unsafe-enum-comparison': 'off',
-    '@typescript-eslint/no-restricted-imports': [
+    '@typescript-eslint/no-restricted-imports': [ 
       'error',
       {
         paths: [
